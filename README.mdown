@@ -6,4 +6,16 @@ Enjo is a code wrapper for Jo, which allows you to code using native Enyo syntax
 Use
 ===
 
+With Enyo
+---------
 Ideally, most Enjo applications should work without any need to change the code. You will, however, need to include both enjo.js and jo.js in your application's index.html page, as well as include the latest version of Jo in your application.
+
+With Jo
+-------
+Enjo also offers access to Jo's API (You can read about the methods at http://joapp.com/docs/). To access a kind's Jo widget, just call this.$.kindName.jo(), and it will return the widget. For example, to change a button's caption, you would use the following:
+	this.$.kindName.jo().setData("Foo bar");
+
+Supported Kinds
+===============
+
+Right now, not many kinds are supported, and only a select number of methods are supported for those kinds. Support for more kinds and methods will be rolled out soon.
