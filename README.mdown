@@ -1,7 +1,7 @@
 About
 =====
 
-Enjo is a code wrapper for Jo, which allows you to code using native Enyo syntax, which is then automagically rendered in the browser using Jo widgets. You can read more about Jo at [http://joapp.com](http://joapp.com].
+Enjo is a code wrapper for Jo, which allows you to code using native Enyo syntax, which is then automagically rendered in the browser using Jo widgets. You can read more about Jo at [http://joapp.com](http://joapp.com).
 
 Use
 ===
