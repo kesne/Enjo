@@ -52,17 +52,56 @@ Supported Kinds
 
 Right now, not many kinds are supported, and only a select number of methods are supported for those kinds. Support for more kinds and methods will be rolled out soon.
 
-Supported kinds: 
- - Button
- - RadioGroup
- - Input
- - PasswordInput
- - HtmlContent
- - Label
- - Caption
- - Header
- - VFlexBox
- - HFlexBox
- - Scrim
- - Function
- - Container
+Supported kinds:
+ 
+- Button
+
+  Supports the setDisabled method, as well as setCaption.
+
+- RadioGroup
+
+  Supports the getValue and getIndex methods.
+
+- Input
+
+  Supports getValue and setValue.
+
+- PasswordInput
+
+  No methods are currently supported.
+
+- HtmlContent
+
+  Supports setContent method.
+
+- Label
+
+  No methods are currently supported.
+
+- Caption
+
+  No methods are currently supported.
+
+- Header
+
+  No methods are currently supported.
+
+- VFlexBox
+
+  No methods are currently supported.
+
+- HFlexBox
+
+  No methods are currently supported.
+
+- Scrim
+
+  Supports setShowing method.
+
+- Function
+
+  No methods are, or will be supported for the Function kind. The Function kind allows for code to be executed inline.
+
+- Container
+
+  No methods are currently supported.

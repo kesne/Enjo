@@ -48,7 +48,7 @@ enyo.kind({
 		this.$.Input.setValue("It works!");
 		
 		this.$.eventPasser.setDisabled(true);
-		this.$.eventPasser.setContent("This change was done using Enyo code...");
+		this.$.eventPasser.setCaption("This change was done using Enyo code...");
 		
 		window.setTimeout((function(){
 			//Use the jo methods to enable it and change it's value.
