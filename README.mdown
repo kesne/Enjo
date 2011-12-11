@@ -1,0 +1,9 @@
+About
+=====
+
+Enjo is a code wrapper for Jo, which allows you to code using native Enyo syntax, which is then automagically rendered in the browser using Jo widgets. You can read more about Jo at http://joapp.com.
+
+Use
+===
+
+Ideally, most Enjo applications should work without any need to change the code. You will, however, need to include both enjo.js and jo.js in your application's index.html page, as well as include the latest version of Jo in your application.
