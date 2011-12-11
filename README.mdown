@@ -15,8 +15,54 @@ With Jo
 Enjo also offers access to Jo's API (You can read about the methods at [http://joapp.com/docs](http://joapp.com/docs]) . To access a kind's Jo widget, just call this.$.kindName.jo(), and it will return the widget. For example, to change a button's caption, you would use the following:
 
 	this.$.kindName.jo().setData("Foo bar");
+	
+In addition to using Jo within Enyo applications, you can also use Enyo kinds within Jo applications. To do this, simply call the enyo kind within a Jo control.
+	
+	// initialize jo
+	jo.load();
+	
+	// create our view card, notice we're nesting widgets inline
+	var card = new joCard([
+	    new joTitle("Hello"),
+	    new joCaption("Hello World!"),
+	    new joDivider(),
+	    
+	    //Use an Enyo kind:
+		enyo.kind({
+        	kind: "VFlexBox",
+        	components: [
+        		{kind: "Button", caption: "OK", onclick: "clickMethod"}
+        	],
+        	clickMethod: function(){
+        		console.log("It works!");
+        	}
+        })
+        
+	]);
+	
+	// setup our stack and screen
+	var stack = new joStack();
+	var screen = new joScreen(stack);
+	
+	// put the card on our view stack
+	stack.push(card);
 
 Supported Kinds
 ===============
 
 Right now, not many kinds are supported, and only a select number of methods are supported for those kinds. Support for more kinds and methods will be rolled out soon.
+
+Supported kinds: 
+ - Button
+ - RadioGroup
+ - Input
+ - PasswordInput
+ - HtmlContent
+ - Label
+ - Caption
+ - Header
+ - VFlexBox
+ - HFlexBox
+ - Scrim
+ - Function
+ - Container
