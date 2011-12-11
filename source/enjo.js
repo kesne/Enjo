@@ -98,6 +98,47 @@ var enyo = {
 				return new joNavbar(fO.content);
 			}
 		},
+		"Footer": {
+			"name": "Footer",
+			"f": function(fO){
+				return new joToolbar(fO.content);
+			}
+		},
+		"Image": {
+			"name": "Image",
+			"f": function(fO){
+				return;
+			}
+		},
+		
+		"Drawer": {
+			"name": "Drawer",
+			"f": function(fO){
+				return enyo._joVariables[this.name] = new joExpando([
+				    new joExpandoTitle(fO.caption || "Expand")
+				]);
+			},
+			"close": function(fO){
+				enyo._joVariables[this.name].close();
+				return true;
+			},
+			"open": function(fO){
+				enyo._joVariables[this.name].open();
+				return true;
+			},
+			"toggleOpen": function(fO){
+				enyo._joVariables[this.name].toggle();
+				return true;
+			}
+		},
+		
+		"Title": {
+			"name": "Title",
+			"f": function(fO){
+				return new joTitle(fO.content);
+			}
+		},
+		
 		"VFlexBox": {
 			"name": "VFlexBox",
 			"f": function(fO){
@@ -256,7 +297,7 @@ var enyo = {
 		}
 		
 		//Jo's menu's don't support the push method used with other components, so we have this custom catch:
-		if(enyoObject.kind == "RadioGroup" || enyoObject.kind == "Menu"){
+		if (enyoObject.kind == "RadioGroup" || enyoObject.kind == "Menu") {
 			eOcR = [];
 			for (x in enyoObject.components) {
 				if(enyoObject.components.hasOwnProperty(x)){
@@ -267,7 +308,17 @@ var enyo = {
 			core.refresh();
 			delete enyoObject.components;
 		}
-		
+		//Expando uses some interesting Syntax, so we'll do this customly:
+		if (enyoObject.kind == "Drawer"){
+			dCfE = new joExpandoContent();
+			for (x in enyoObject.components) {
+				if(enyoObject.components.hasOwnProperty(x)){
+					dCfE.push(enyo.kind(enyoObject.components[x], true))
+				}
+			}
+			core.push(dCfE);
+			delete enyoObject.components;
+		}
 		if (enyoObject.components) {
 			//if the core even allows us to push onto it:
 			if(core.push){

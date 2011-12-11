@@ -35,11 +35,29 @@ enyo.kind({
 		]},
 		
 		{name: "statusText", content: "Select one"},
+
+		{kind: "Title", content: "Drawers"},
+		{style: "height: 20px;"},
+		{kind: "Drawer", name: "drawer", caption: "Drawer", components: [
+			{content: "Now you see me now you don't"},
+			{kind: "Button", caption: "Close drawer", onclick: "closeDrawer"}
+		]},
+		{kind: "Button", caption: "Toggle Drawer", onclick: "toggleDrawer"},
+		
+		{kind: "Footer", content: "Check out this cool Footer!"},
 		
 		{kind: "Scrim", showing: false, components: [
 			{content: "Tap anywhere to dismiss...", style: "margin-top: 55px; color: white; margin-left: auto; margin-right: auto; text-align: center;"}
 		]},
 	],
+	
+	closeDrawer: function(inSender) {
+	    this.$.drawer.close();
+	},
+	
+	toggleDrawer: function(inSender) {
+	    this.$.drawer.toggleOpen();
+	},
 	
 	theClickMethod: function(){
 		

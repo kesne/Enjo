@@ -85,6 +85,14 @@ Supported kinds:
 - Header
 
   No methods are currently supported.
+  
+- Footer
+  
+  No methods are currently supported.
+  
+- Drawer
+
+  Supports the open, close, and toggleOpen methods.
 
 - VFlexBox
 
