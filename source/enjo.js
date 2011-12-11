@@ -23,7 +23,7 @@ var enyo = {
 					return enyo._joVariables[this.name] = new joButton(fO.caption || "Button");
 				}
 			},
-			"setContent": function(fO){
+			"setCaption": function(fO){
 				enyo._joVariables[this.name].setData(fO);
 				return true;
 			},
