@@ -2,10 +2,6 @@ enyo.kind({
 	kind: "VFlexBox",
 	name: "loginBlock",
 	components: [
-		{kind: "Label", content: "Username:"},
-		{kind: "Input"},
-		{kind: "Label", content: "Password:"},
-		{kind: "PasswordInput"},
 		{kind: "HFlexBox", components: [
 			{kind: "Button", caption: "Login"},
 			{kind: "Button", caption: "Cancel"}
@@ -15,7 +11,7 @@ enyo.kind({
 
 
 enyo.kind({
-		kind: "VFlexBox",
+	kind: "VFlexBox",
 	name: "myApp",
 	components: [
 		{kind: "Header", content: "Enjo Demo"},
@@ -24,6 +20,12 @@ enyo.kind({
 		{kind: "Button", caption: "This button defines the click method inline.", onclick: function(){
 			alert("This works too!");
 		}},
+		{kind: "Button", disabled: true, caption: "This button is disabled."},
+		
+		{kind: "Label", content: "Username:"},
+		{kind: "Input"},
+		{kind: "Label", content: "Password:"},
+		{kind: "PasswordInput"},
 		
 		{kind: "loginBlock"},
 		
@@ -40,6 +42,11 @@ enyo.kind({
 	],
 	
 	theClickMethod: function(){
+		
+		//Change input values:
+		this.$.Input.getValue();
+		this.$.Input.setValue("It works!");
+		
 		this.$.eventPasser.setDisabled(true);
 		this.$.eventPasser.setContent("This change was done using Enyo code...");
 		

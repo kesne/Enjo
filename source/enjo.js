@@ -17,10 +17,15 @@ var enyo = {
 			"name": "Button",
 			"f": function(fO){
 				//Create a joButton with the caption, and pass a blank function for the click if none is defined.
-				return enyo._joVariables[this.name] = new joButton(fO.caption || "Button");
+				if(fO.disabled === true){
+					return enyo._joVariables[this.name] = new joButton(fO.caption || "Button").disable();
+				}else{
+					return enyo._joVariables[this.name] = new joButton(fO.caption || "Button");
+				}
 			},
 			"setContent": function(fO){
 				enyo._joVariables[this.name].setData(fO);
+				return true;
 			},
 			"setDisabled": function(fO){
 				//Enable/Disable the button.
@@ -50,7 +55,14 @@ var enyo = {
 		"Input": {
 			"name": "Input",
 			"f": function(fO){
-				return new joInput(fO.content);
+				return enyo._joVariables[this.name] = new joInput(fO.content);
+			},
+			"getValue": function(fO){
+				return enyo._joVariables[this.name].getData();
+			},
+			"setValue": function(fO){
+				enyo._joVariables[this.name].setData(fO);
+				return true;
 			}
 		},
 		"PasswordInput": {
@@ -171,7 +183,7 @@ var enyo = {
 		//Create the core object. Everything gets pushed into this.
 		var core = methods.f(enyoObject);
 		
-////////////////////////////////////////////////////////////////
+		////////////////////////////////////////////////////////////////
 		
 		/*
 		 * 
@@ -358,8 +370,20 @@ var enyo = {
 };
 
 //Enable the joDOM. This is all we need to get going. The renderInto function will load the rest.
-joDOM.enable();
-//Load up the CSS:
-enyo.sheet(cssLocation || "css/jo2.css");
-//Load up our depends.js file.
-enyo.script("depends.js");
+
+if(!("ENJOSETTINGS" in window)){
+	ENJOSETTINGS = {
+		"css": "css/jo2.css",
+		"jo": "jo.js"
+	}
+}
+
+if("joDOM" in window){
+	joDOM.enable();
+	//Load up the CSS:
+	enyo.sheet(ENJOSETTINGS.css || "css/jo2.css");
+	//Load up our depends.js file.
+	enyo.script("depends.js");
+}else{
+	return false;
+}
