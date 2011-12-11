@@ -1,7 +1,7 @@
 About
 =====
 
-Enjo is a code wrapper for Jo, which allows you to code using native Enyo syntax, which is then automagically rendered in the browser using Jo widgets. You can read more about Jo at http://joapp.com.
+Enjo is a code wrapper for Jo, which allows you to code using native Enyo syntax, which is then automagically rendered in the browser using Jo widgets. You can read more about Jo at [http://joapp.com](http://joapp.com].
 
 Use
 ===
@@ -12,7 +12,8 @@ Ideally, most Enjo applications should work without any need to change the code.
 
 With Jo
 -------
-Enjo also offers access to Jo's API (You can read about the methods at http://joapp.com/docs/). To access a kind's Jo widget, just call this.$.kindName.jo(), and it will return the widget. For example, to change a button's caption, you would use the following:
+Enjo also offers access to Jo's API (You can read about the methods at [http://joapp.com/docs](http://joapp.com/docs]) . To access a kind's Jo widget, just call this.$.kindName.jo(), and it will return the widget. For example, to change a button's caption, you would use the following:
+
 	this.$.kindName.jo().setData("Foo bar");
 
 Supported Kinds
