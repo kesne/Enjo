@@ -114,9 +114,15 @@ var enyo = {
 		"Drawer": {
 			"name": "Drawer",
 			"f": function(fO){
-				return enyo._joVariables[this.name] = new joExpando([
-				    new joExpandoTitle(fO.caption || "Expand")
-				]);
+				if(fO.open === true){
+					return enyo._joVariables[this.name] = new joExpando([
+					    new joExpandoTitle(fO.caption || "Expand")
+					]).open();
+				}else{
+					return enyo._joVariables[this.name] = new joExpando([
+					    new joExpandoTitle(fO.caption || "Expand")
+					]);
+				}
 			},
 			"close": function(fO){
 				enyo._joVariables[this.name].close();
