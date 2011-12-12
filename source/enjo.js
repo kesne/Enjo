@@ -372,8 +372,10 @@ var enyo = {
 		
 		if(enyoObject.kind == "Header"){
 			enyo.header = core;
+			core = new joContainer();
 		}else if(enyoObject.kind == "Toolbar"){
 			enyo.footer = core;
+			core = new joContainer();
 		}
 		
 		/*
@@ -383,8 +385,8 @@ var enyo = {
 		 * 
 		 *  
 		 */
+
 		if(enyoObject.name && !enyo._kinds[enyoObject.name] && !r){
-			
 			//This breaks our style applyer:
 			enyo._kinds[enyoObject.name] = enyoObject;
 			
@@ -484,7 +486,7 @@ var enyo = {
 if(!("ENJOSETTINGS" in window)){
 	ENJOSETTINGS = {
 		"css": "css/jo2.css",
-		"jo": "jo.js"
+		"jo": "jo.js",
 	}
 }
 
