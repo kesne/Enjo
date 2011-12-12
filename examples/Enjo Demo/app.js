@@ -13,10 +13,17 @@ enyo.kind({
 	kind: "VFlexBox",
 	name: "myApp",
 	x: 5,
-	components: [
+	components: [		
 		{kind: "Header", content: "Enjo Demo"},
 		{height: "20px"},
-			{kind: "Button", name: "eventPasser", caption: "This button passes a click event.", onclick: "theClickMethod"},
+		{kind: "Pane", transitionKind: "enyo.transitions.LeftRightFlyin", components: [
+		    {name: "mainView", components: [
+		    	{kind: "Button", caption: "Push new view.", onclick: function(inSender){
+		    		//this.$.Pane.jo().forward();
+		    		//this.$.Pane.jo().push();
+		    		this.$.Pane.selectView(this.$.otherView);
+		    	}},
+		    	{kind: "Button", name: "eventPasser", caption: "This button passes a click event.", onclick: "theClickMethod"},
 			{kind: "Button", caption: "This button defines the click method inline.", onclick: function(){
 				alert("This works too!");
 			}},
@@ -43,12 +50,22 @@ enyo.kind({
 				{kind: "Button", caption: "Close drawer", onclick: "closeDrawer"}
 			]},
 			{kind: "Button", caption: "Toggle Drawer", onclick: "toggleDrawer"},
+		    ]},
+		    
+		    {name: "otherView", components: [
+		    	{kind: "Button", caption: "Other View", onclick: function(inSender){
+		    		this.$.Pane.selectView(this.$.mainView);
+		    	}},
+		    ]}
+		]},
+		
 		{height: "40px"},
 		{kind: "Toolbar", content: "Check out this cool Footer!"},
 		
 		{kind: "Scrim", showing: false, components: [
 			{content: "Tap anywhere to dismiss...", style: "margin-top: 55px; color: white; margin-left: auto; margin-right: auto; text-align: center;"}
 		]},
+		
 	],
 	
 	closeDrawer: function(inSender) {

@@ -10,6 +10,24 @@ Object.prototype.clone = function() {
 
 var enyo = {
 	_kinds: {
+		"Pane": {
+			"name": "Pane",
+			"f": function(fO){
+				return enyo._joVariables[this.name] = new joStack();
+			},
+			"selectView": function(fO){
+				console.log(fO.jo())
+				enyo._joVariables[this.name].push(fO.jo());
+				return true;
+			},
+			"selectViewByName": function(fO){
+				
+			},
+			"selectViewByIndex": function(fO){
+				
+			}
+		},
+		
 		"Button": {
 			"name": "Button",
 			"f": function(fO){
@@ -350,6 +368,17 @@ var enyo = {
 				}
 			}
 			core.push(dCfE);
+			delete enyoObject.components;
+		}
+		//Pane handling:
+		if (enyoObject.kind == "Pane"){
+			var jVfP = [];
+			for (x in enyoObject.components) {
+				if(enyoObject.components.hasOwnProperty(x)){
+					jVfP.push(enyo.kind(enyoObject.components[x], true));
+				}
+			}
+			core.push(jVfP[0]);
 			delete enyoObject.components;
 		}
 		if (enyoObject.components) {

@@ -765,31 +765,42 @@ jostack > * {
   -ms-transform: rotatez(0);
   -ms-transition: -ms-transform 0.3s ease-out;
   position: absolute;
-  /*
+  
+  -webkit-transition: opacity 0.3s ease-out;
+  -moz-transition: opacity 0.3s ease-out;
+  -o-transition: opacity 0.3s ease-out;
+  -ms-transition: opacity 0.3s ease-out;
+  
 	display: block;
 	height: 100%;
 	width: 100%;
 	overflow: hidden;
 	padding: 0;
 	margin: 0;
-*/
+	position: absolute;
 
 }
 jostack > .next {
   z-index: -1;
+  /*
   -webkit-transform: rotatez(45deg) translatey(-10%) translatex(100%);
   -moz-transform: rotatez(45deg);
   -o-transform: rotatez(45deg);
   -ms-transform: rotatez(45deg);
+  */
+  opacity: 0;
   height: 100%;
   overflow: hidden;
 }
 jostack > .prev {
   z-index: 1;
+  /*
   -webkit-transform: rotatez(-45deg) translatey(10%) translatex(-100%);
   -moz-transform: rotatez(-45deg);
   -o-transform: rotatez(-45deg);
   -ms-transform: rotatez(-45deg);
+  */
+  opacity: 0;
   height: 100%;
   overflow: hidden;
 }
