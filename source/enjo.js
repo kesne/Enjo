@@ -10,9 +10,6 @@ Object.prototype.clone = function() {
 
 var enyo = {
 	_kinds: {
-		/*
-		 * FORMS:
-		 */
 		"Button": {
 			"name": "Button",
 			"f": function(fO){
@@ -98,7 +95,7 @@ var enyo = {
 				return new joNavbar(fO.content);
 			}
 		},
-		"Footer": {
+		"Toolbar": {
 			"name": "Footer",
 			"f": function(fO){
 				return new joToolbar(fO.content);
@@ -148,13 +145,19 @@ var enyo = {
 		"VFlexBox": {
 			"name": "VFlexBox",
 			"f": function(fO){
-				return new joFlexcol();
+				return new joContainer();
 			}
 		},
 		"HFlexBox": {
 			"name": "HFlexBox",
 			"f": function(fO){
 				return new joFlexrow();
+			}
+		},
+		"Scroller": {
+			"name": "Scroller",
+			"f": function(fO){
+				return new joScroller();
 			}
 		},
 		"Scrim": {
@@ -254,8 +257,32 @@ var enyo = {
 				core.setStyle(styleName);
 			}
 		}
-		//TODO:
-		//Flex, Height, Width all inline.
+
+		if(enyoObject.flex){
+			if(core.setStyle){
+				core.setStyle({
+					"display": "-webkit-box",
+					"webkitBoxFlex": parseInt(enyoObject.flex),
+					"webkitBoxOrient": "vertical"
+				});
+			}
+		}
+		
+		if(enyoObject.height){
+			if(core.setStyle){
+				core.setStyle({
+					"height": enyoObject.height,
+				});
+			}
+		}
+		
+		if(enyoObject.width){
+			if(core.setStyle){
+				core.setStyle({
+					"height": enyoObject.width,
+				});
+			}
+		}
 		
 		/*
 		 * 
@@ -304,10 +331,10 @@ var enyo = {
 		
 		//Jo's menu's don't support the push method used with other components, so we have this custom catch:
 		if (enyoObject.kind == "RadioGroup" || enyoObject.kind == "Menu") {
-			eOcR = [];
+			var eOcR = [];
 			for (x in enyoObject.components) {
 				if(enyoObject.components.hasOwnProperty(x)){
-					eOcR.push(enyoObject.components[x].caption)
+					eOcR.push(enyoObject.components[x].caption);
 				}
 			}
 			core.setData(eOcR);
@@ -316,10 +343,10 @@ var enyo = {
 		}
 		//Expando uses some interesting Syntax, so we'll do this customly:
 		if (enyoObject.kind == "Drawer"){
-			dCfE = new joExpandoContent();
+			var dCfE = new joExpandoContent();
 			for (x in enyoObject.components) {
 				if(enyoObject.components.hasOwnProperty(x)){
-					dCfE.push(enyo.kind(enyoObject.components[x], true))
+					dCfE.push(enyo.kind(enyoObject.components[x], true));
 				}
 			}
 			core.push(dCfE);
@@ -343,6 +370,11 @@ var enyo = {
 			return core;
 		}
 		
+		if(enyoObject.kind == "Header"){
+			enyo.header = core;
+		}else if(enyoObject.kind == "Toolbar"){
+			enyo.footer = core;
+		}
 		
 		/*
 		 *
@@ -352,6 +384,7 @@ var enyo = {
 		 *  
 		 */
 		if(enyoObject.name && !enyo._kinds[enyoObject.name] && !r){
+			
 			//This breaks our style applyer:
 			enyo._kinds[enyoObject.name] = enyoObject;
 			
@@ -367,8 +400,28 @@ var enyo = {
 			        	core
 			        ]);
 			        // setup our stack and screen
-					var stack = new joStack();
-					var screen = new joScreen(stack);
+					var stack;
+					var screen;
+					
+					if(!enyo.header){
+						console.log("No header");
+						enyo.header = new joContainer();
+					}
+					if(!enyo.footer){
+						enyo.footer = new joContainer();
+					}
+					
+					screen = new joScreen([
+						new joContainer([
+							new joFlexcol([
+								//Header:
+								enyo.header,
+								stack = new joStackScroller()
+							]),
+							//Footer
+							enyo.footer,
+						]).setStyle({position: "absolute", top: "0", left: "0", bottom: "0", right: "0"})
+					]);
 					
 					// put the card on our view stack
 					stack.push(card);

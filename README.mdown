@@ -86,7 +86,7 @@ Supported kinds:
 
   No methods are currently supported.
   
-- Footer
+- Toolbar
   
   No methods are currently supported.
   
