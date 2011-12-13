@@ -13,18 +13,41 @@ var enyo = {
 		"Pane": {
 			"name": "Pane",
 			"f": function(fO){
-				return enyo._joVariables[this.name] = new joStack();
+				if(fO.transitionKind && fO.transitionKind !== "enyo.transitions.Simple"){
+					return enyo._joVariables[this.name] = new joStack();
+				}else{
+					
+					//Create the transitionless style if it's not already there.
+					if(!document.getElementById('dEsP')){
+						var dEsP = document.createElement("style");
+						dEsP.type = "text/css";
+						dEsP.id = "dEsP";
+						//We still need some transition or it won't work, so we just make it so small, nobody sees it!
+						dEsP.innerHTML = ".joStackSimple > * { 				\
+							/* Our simple transition stuff */				\
+						  -webkit-transition: all 0.00001s ease-out;		\
+						  -moz-transition: all 0.00001s ease-out;			\
+						  -o-transition: all 0.00001s ease-out;				\
+						  -ms-transition: all 0.00001s ease-out;			\
+						}";
+						document.getElementsByTagName('head')[0].appendChild(dEsP);
+					}
+					
+					return enyo._joVariables[this.name] = new joStack().setStyle("joStackSimple");
+				}
 			},
 			"selectView": function(fO){
-				console.log(fO.jo())
 				enyo._joVariables[this.name].push(fO.jo());
 				return true;
 			},
 			"selectViewByName": function(fO){
-				
+				enyo._joVariables[this.name].push(enyo._joVariables[fO]);
+				return true;
 			},
 			"selectViewByIndex": function(fO){
-				
+				console.log(enyo._joVariables[this.name].getData());
+				enyo._joVariables[this.name].push(this.panes[fO]);
+				return true;
 			}
 		},
 		
@@ -360,7 +383,7 @@ var enyo = {
 			delete enyoObject.components;
 		}
 		//Expando uses some interesting Syntax, so we'll do this customly:
-		if (enyoObject.kind == "Drawer"){
+		else if (enyoObject.kind == "Drawer"){
 			var dCfE = new joExpandoContent();
 			for (x in enyoObject.components) {
 				if(enyoObject.components.hasOwnProperty(x)){
@@ -371,17 +394,19 @@ var enyo = {
 			delete enyoObject.components;
 		}
 		//Pane handling:
-		if (enyoObject.kind == "Pane"){
+		else if (enyoObject.kind == "Pane"){
 			var jVfP = [];
 			for (x in enyoObject.components) {
 				if(enyoObject.components.hasOwnProperty(x)){
 					jVfP.push(enyo.kind(enyoObject.components[x], true));
 				}
 			}
+			enyo.binder.$[cashID].panes = jVfP;
 			core.push(jVfP[0]);
 			delete enyoObject.components;
 		}
-		if (enyoObject.components) {
+		//Other:
+		else if (enyoObject.components) {
 			//if the core even allows us to push onto it:
 			if(core.push){
 				//Create a container for the components.

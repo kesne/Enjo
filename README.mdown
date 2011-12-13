@@ -54,67 +54,59 @@ Right now, not many kinds are supported, and only a select number of methods are
  
 - Button
 
-	- Supports the setDisabled method, as well as setCaption.
+	- setDisabled
+	- setCaption
 
 - RadioGroup
 
-	- Supports the getValue and getIndex methods.
+	- getValue 
+	- getIndex
 
 - Input
 
-	- Supports getValue and setValue.
+	- getValue
+	- setValue
 
 - PasswordInput
 
-	- No methods are currently supported.
-
 - HtmlContent
 
-	- Supports setContent method.
+	- setContent
 
 - Label
 
-	- No methods are currently supported.
-
 - Caption
 
-	- No methods are currently supported.
-
 - Header
-
-	- No methods are currently supported.
   
 - Toolbar
   
-	- No methods are currently supported.
-  
 - Drawer
 
-	- Supports the open, close, and toggleOpen methods.
+	- open
+	- close
+	- toggleOpen
 
 - VFlexBox
 
-	- No methods are currently supported.
-
 - HFlexBox
 
-	- No methods are currently supported.
+- Pane
+	- selectView
+	- selectViewByName
+	- selectViewByIndex
+	
+	The selectViewByIndex method is very limited. It uses data obtained from creating the kind to push the pane, and does not support dynamic changes. It's recommended that you use selectView or selectViewByName.
 
 - Scrim
 
-	- Supports setShowing method.
+	- setShowing
 
 - Function
-
-	- No methods are, or will be supported for the Function kind. The Function kind allows for code to be executed inline.
 	
 - Scroller
-	
-	- No methods.
 
 - Container
-
-	- No methods are currently supported.
 	
 
 Notes
@@ -124,8 +116,12 @@ Enyo, the syntax for which this library is based, [is going to be open sourced](
 
 Things get messy when you start dealing with multi-kind and multi-pane layouts. If you're trying to port over a visually complex layout, things will probably break. 
 
+There's a weird bug with the Pane kind which causes content to get stacked vertically. Because of this, transitions may be a bit funky.
+
 Enjo's layouts are designed to have one header and one footer. If your layout attempts to use more than one, it will fail miserably. I'm working on fixing this. Scrollers are implemented automagically, and as such, the Scroller kind will only return a joContainer.
 
 There is no current implementation of the Enyo event model, and there is no support for published properties. 
+
+The Enyo kind shorthand is currently all that's supported (using "Button" instead of enyo.Button). When creating your own kind, you can't define the namespace.
 
 Suggestions? Bug me about them on twitter: [@kesne](http://twitter.com/kesne)

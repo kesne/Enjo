@@ -16,7 +16,7 @@ enyo.kind({
 	components: [		
 		{kind: "Header", content: "Enjo Demo"},
 		{height: "20px"},
-		{kind: "Pane", transitionKind: "enyo.transitions.LeftRightFlyin", components: [
+		{kind: "Pane", transitionKind: "enyo.transitions.Simple", components: [
 		    {name: "mainView", components: [
 		    	{kind: "Button", caption: "Push new view.", onclick: function(inSender){
 		    		//this.$.Pane.jo().forward();
@@ -54,9 +54,14 @@ enyo.kind({
 		    
 		    {name: "otherView", components: [
 		    	{kind: "Button", caption: "Other View", onclick: function(inSender){
-		    		this.$.Pane.selectView(this.$.mainView);
+		    		this.$.Pane.selectViewByName("mainView");
 		    	}},
-		    ]}
+		    ]},
+		
+			//View that never gets pushed:
+			{name: "hiddenView", components: [
+				{kind: "Title", content: "This should never be seen."},
+		    ]},
 		]},
 		
 		{height: "40px"},
