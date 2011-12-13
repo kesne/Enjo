@@ -175,7 +175,7 @@ var enyo = {
 		"Scroller": {
 			"name": "Scroller",
 			"f": function(fO){
-				return new joScroller();
+				return new joContainer();
 			}
 		},
 		"Scrim": {

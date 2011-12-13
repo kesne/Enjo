@@ -47,69 +47,85 @@ In addition to using Jo within Enyo applications, you can also use Enyo kinds wi
 	// put the card on our view stack
 	stack.push(card);
 
-Supported Kinds
-===============
+Supported Kinds and Methods
+===========================
 
 Right now, not many kinds are supported, and only a select number of methods are supported for those kinds. Support for more kinds and methods will be rolled out soon.
-
-Supported kinds:
  
 - Button
 
-  Supports the setDisabled method, as well as setCaption.
+	- Supports the setDisabled method, as well as setCaption.
 
 - RadioGroup
 
-  Supports the getValue and getIndex methods.
+	- Supports the getValue and getIndex methods.
 
 - Input
 
-  Supports getValue and setValue.
+	- Supports getValue and setValue.
 
 - PasswordInput
 
-  No methods are currently supported.
+	- No methods are currently supported.
 
 - HtmlContent
 
-  Supports setContent method.
+	- Supports setContent method.
 
 - Label
 
-  No methods are currently supported.
+	- No methods are currently supported.
 
 - Caption
 
-  No methods are currently supported.
+	- No methods are currently supported.
 
 - Header
 
-  No methods are currently supported.
+	- No methods are currently supported.
   
 - Toolbar
   
-  No methods are currently supported.
+	- No methods are currently supported.
   
 - Drawer
 
-  Supports the open, close, and toggleOpen methods.
+	- Supports the open, close, and toggleOpen methods.
 
 - VFlexBox
 
-  No methods are currently supported.
+	- No methods are currently supported.
 
 - HFlexBox
 
-  No methods are currently supported.
+	- No methods are currently supported.
 
 - Scrim
 
-  Supports setShowing method.
+	- Supports setShowing method.
 
 - Function
 
-  No methods are, or will be supported for the Function kind. The Function kind allows for code to be executed inline.
+	- No methods are, or will be supported for the Function kind. The Function kind allows for code to be executed inline.
+	
+- Scroller
+	
+	- No methods.
 
 - Container
 
-  No methods are currently supported.
+	- No methods are currently supported.
+	
+
+Notes
+=====
+
+Enyo, the syntax for which this library is based, [is going to be open sourced](http://www.hp.com/hpinfo/newsroom/press/2011/111209xa.html?mtxs=rss-corp-news). If you're using Enjo for porting purposes, I'd recommend just using Enyo when it gets open sourced.
+
+Things get messy when you start dealing with multi-kind and multi-pane layouts. If you're trying to port over a visually complex layout, things will probably break. 
+
+Enjo's layouts are designed to have one header and one footer. If your layout attempts to use more than one, it will fail miserably. I'm working on fixing this. Scrollers are implemented automagically, and as such, the Scroller kind will only return a joContainer.
+
+There is no current implementation of the Enyo event model, and there is no support for published properties. 
+
+Suggestions? Bug me about them on twitter: [@kesne](http://twitter.com/kesne)
