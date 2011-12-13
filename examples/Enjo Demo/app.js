@@ -10,13 +10,32 @@ enyo.kind({
 });
 
 enyo.kind({
+	kind: "Container",
+	name: "myApp",
+	components: [
+		{kind: "Pane", transitionKind: "Elegant", components: [
+			{name: "Pane1", components: [
+				{kind: "Button", onclick: function(){
+					this.$.Pane.selectViewByName("Pane2");
+				}}
+			]},
+			{name: "Pane2", components: [
+				{kind: "Button", onclick: function(){
+					this.$.Pane.selectViewByName("Pane1");
+				}}
+			]}
+		]}
+	]
+})
+/*
+enyo.kind({
 	kind: "VFlexBox",
 	name: "myApp",
 	x: 5,
 	components: [		
 		{kind: "Header", content: "Enjo Demo"},
 		{height: "20px"},
-		{kind: "Pane", transitionKind: "enyo.transitions.Simple", components: [
+		{kind: "Pane", transitionKind: "enyo.transitions.Elegant", components: [
 		    {name: "mainView", components: [
 		    	{kind: "Button", caption: "Push new view.", onclick: function(inSender){
 		    		//this.$.Pane.jo().forward();
@@ -50,7 +69,7 @@ enyo.kind({
 				{kind: "Button", caption: "Close drawer", onclick: "closeDrawer"}
 			]},
 			{kind: "Button", caption: "Toggle Drawer", onclick: "toggleDrawer"},
-		    ]},
+		]},
 		    
 		    {name: "otherView", components: [
 		    	{kind: "Button", caption: "Other View", onclick: function(inSender){
@@ -107,6 +126,7 @@ enyo.kind({
 	}
 
 });
+*/
 /*
 myApp = (function(){
 	this.renderInto = function(){

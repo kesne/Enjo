@@ -198,7 +198,7 @@ var enyo = {
 		"Scroller": {
 			"name": "Scroller",
 			"f": function(fO){
-				return new joContainer();
+				return new joScroller();
 			}
 		},
 		"Scrim": {
@@ -370,8 +370,17 @@ var enyo = {
 			}
 		}
 		
+		if(enyoObject.kind == "scroller"){
+			var nEjS = new joCard();
+			for (x in enyoObject.components) {
+				if(enyoObject.components.hasOwnProperty(x)){
+					core.push(enyoObject.components[x].caption);
+				}
+			}
+			core = nEjS.push(core);
+		}
 		//Jo's menu's don't support the push method used with other components, so we have this custom catch:
-		if (enyoObject.kind == "RadioGroup" || enyoObject.kind == "Menu") {
+		else if (enyoObject.kind == "RadioGroup" || enyoObject.kind == "Menu") {
 			var eOcR = [];
 			for (x in enyoObject.components) {
 				if(enyoObject.components.hasOwnProperty(x)){
@@ -452,9 +461,11 @@ var enyo = {
 			    	//Load up all of Jo.
 			    	jo.load();
 			        //Render the application. Jo doesn't have a way to render it anywhere specifically, so we'll just assume they're calling with document.body.
-			        var card = new joCard([
+			        
+					var card = new joCard([
 			        	core
 			        ]);
+			
 			        // setup our stack and screen
 					var stack;
 					var screen;
@@ -472,7 +483,7 @@ var enyo = {
 							new joFlexcol([
 								//Header:
 								enyo.header,
-								stack = new joStackScroller()
+								stack = new joContainer()
 							]),
 							//Footer
 							enyo.footer,
